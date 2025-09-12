@@ -3,7 +3,7 @@
 #	Alunos:					NUSP:
 #	Arthur Gomes Mesquita de Souza		14835157
 #	Nicolas Zimmer Fernandes		--------
-#	Luana Fialho				--------
+#	Luana Fialho Franco de Melo		14755061
 #	Lucas Moro Farias			--------
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
