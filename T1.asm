@@ -35,9 +35,9 @@ loop_escolha:
               addi t0, x0, 2
               beq a0, t0, remover_item
               addi t0, x0, 3
-              beq t0, x0, lista_invent
+              beq a0, x0, lista_invent
               addi t0, x0, 4
-              beq t0, x0, busca
+              beq a0, x0, busca
 
 fim_programa:
             addi a7, x0, 10
