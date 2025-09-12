@@ -16,9 +16,20 @@ menu:         .asciz "Escolha uma instrução do menu.\n1-Adicionar item\n2-Remo
               .align 2
               .globl main
 main:        
+              #printar boas vindas
               addi a7, x0, 4
               la a0, text_ini
               ecall
+              j loop_escolha
+loop_escolha:
+              #printar tabela
               addi a7, x0, 4
               la a0, menu
               ecall
+              addi a7, x0, 5
+              ecall
+              addi t0, x0, 5
+              beq a0, t0, fim_programa  
+fim_programa:
+            addi a7, x0, 10
+            ecall
