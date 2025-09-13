@@ -13,8 +13,10 @@ text_ini:	.asciz "Boas vindas, aventureiro!\n"
 menu:		.asciz "\nEscolha uma instrução do menu.\n1-Adicionar item\n2-Remover item\n3-Listar inventário\n4-Buscar item\n5- Sair\n\n=> "
 text_add:	.asciz "\nForneça o ID do item para adicioná-lo:\n[ID] "
 
-		.text
 		.align 2
+root_lista:	.space 8
+
+		.text
 		.globl main
 main:
 		# Print boas vindas
@@ -51,12 +53,15 @@ fim_programa:
 		addi a7, x0, 10
 		ecall
 
-adicionar_item:	 
+adicionar_item:	
+		# Print texto
 		addi a7, x0, 4
 		la a0, text_add
 		ecall
 		
 		jal get_int
+		
+		jal add_lista
 		
 		j loop_escolha
 
@@ -73,5 +78,10 @@ get_int:
 		# Função para ler inteiro do usuário
 		addi a7, zero, 5
 		ecall
+		
+		jr ra
+		
+add_lista:	
+		# Função para criar a lista de itens
 		
 		jr ra
