@@ -179,4 +179,4 @@ fim_lista:
 	        # encadear novo nó ao último
 	        sw t2, 0(t1)
 		
-	        jr ra
+	        j loop_escolha
