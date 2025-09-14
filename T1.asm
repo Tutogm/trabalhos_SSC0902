@@ -18,6 +18,7 @@ root_lista: 	.space 4      # ponteiro para o primeiro nó (NULL inicialmente)
 
 	        .text
 	        .globl main
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 main:
 	        # Print boas vindas
 	        addi a7, x0, 4
@@ -50,11 +51,61 @@ loop_escolha:
 		
 	        j loop_escolha
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 fim_programa:
 	        # Encerrar programa
 	        addi a7, x0, 10
 	        ecall
 
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+remover_item:
+        	j loop_escolha
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+lista_invent:
+	        # carrega o início da lista
+	        la t0, root_lista
+	        lw t1, 0(t0)         # t1 = primeiro nó
+	        beqz t1, fim_lista_inv   # se lista vazia, sai
+
+loop_inv:
+	        lw a0, 4(t1)         # carrega ID
+	        li a7, 1             # syscall print_int
+	        ecall
+	
+	        # print espaço depois do número
+	        li a7, 11            # syscall print_char
+	        li a0, 32            # espaço em ASCII
+	        ecall
+	
+	        lw t1, 0(t1)         # avança para próximo nó
+	        bnez t1, loop_inv    # continua se não for NULL
+
+fim_lista_inv:
+	        # print quebra de linha
+	        li a7, 11
+	        li a0, 10            # '\n'
+	        ecall
+	        jr ra
+	        
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+busca:
+        	j loop_escolha
+        	
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+get_int:
+	        # Função para ler inteiro do usuário
+	        addi a7, zero, 5
+	        ecall
+	        jr ra
+	        
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 adicionar_item:
 	        # Print texto
 	        addi a7, x0, 4
@@ -70,22 +121,7 @@ adicionar_item:
 	        jal add_lista
 		
 	        j loop_escolha
-
-remover_item:
-        	j loop_escolha
-
-lista_invent:
-        	j loop_escolha
-
-busca:
-        	j loop_escolha
-
-get_int:
-	        # Função para ler inteiro do usuário
-	        addi a7, zero, 5
-	        ecall
-	        jr ra
-	
+	        
 add_lista:
 	        # Verifica se a lista está vazia
 	        la s0, root_lista
